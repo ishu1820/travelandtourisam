@@ -4,7 +4,10 @@ import javax.swing.*;
 import java.sql.*;
 import java.awt.event.*;
 import javax.swing.border.*;
-public class Signup extends JFrame{
+public class Signup extends JFrame implements ActionListener{
+    JButton create, back;
+    JTextField tfname, tfpassword, tfusername, tfanswer;
+    Choice security;
     Signup(){
         setBounds(350, 200, 900, 360);
         getContentPane().setBackground(Color.WHITE);
@@ -21,7 +24,7 @@ public class Signup extends JFrame{
         lblusername.setFont(new Font("SAN SERIF", Font.BOLD, 14));
         p1.add(lblusername);
 
-        JTextField tfusername = new JTextField();
+        tfusername = new JTextField();
         tfusername.setBounds(190, 20, 180, 25);
         tfusername.setBorder(BorderFactory.createEmptyBorder());
         p1.add(tfusername);
@@ -31,7 +34,7 @@ public class Signup extends JFrame{
         lblname.setFont(new Font("SAN SERIF", Font.BOLD, 14));
         p1.add(lblname);
 
-        JTextField tfname = new JTextField();
+        tfname = new JTextField();
         tfname.setBounds(190, 60, 180, 25);
         tfname.setBorder(BorderFactory.createEmptyBorder());
         p1.add(tfname);
@@ -41,7 +44,7 @@ public class Signup extends JFrame{
         lblpassword.setFont(new Font("SAN SERIF", Font.BOLD, 14));
         p1.add(lblpassword);
 
-        JTextField tfpassword = new JTextField();
+        tfpassword = new JTextField();
         tfpassword.setBounds(190, 100, 180, 25);
         tfpassword.setBorder(BorderFactory.createEmptyBorder());
         p1.add(tfpassword);
@@ -51,7 +54,7 @@ public class Signup extends JFrame{
         lblsecurity.setFont(new Font("SAN SERIF", Font.BOLD, 14));
         p1.add(lblsecurity);
 
-        Choice security = new Choice();
+        security = new Choice();
         security.add("Fav Character from GOT");
         security.add("Childhood nickname");
         security.add("Your Birth Place");
@@ -64,25 +67,27 @@ public class Signup extends JFrame{
         lblanswer.setFont(new Font("SAN SERIF", Font.BOLD, 14));
         p1.add(lblanswer);
 
-        JTextField tfanswer = new JTextField();
+        tfanswer = new JTextField();
         tfanswer.setBounds(190, 180, 180, 25);
         tfanswer.setBorder(BorderFactory.createEmptyBorder());
         p1.add(tfanswer);
 
-        JButton create = new JButton("Create");
+        create = new JButton("Create");
         create.setBounds(50, 220, 80, 30 );
         create.setBackground(Color.WHITE);
         create.setForeground(new Color(133, 193, 233));
         create.setFont(new Font("Tahoma", Font.BOLD, 14));
         create.setBorder(new LineBorder(new Color(133, 193, 233)));
+        create.addActionListener(this);
         p1.add(create);
 
-        JButton back = new JButton("Back");
+        back = new JButton("Back");
         back.setBounds(190, 220, 80, 30 );
         back.setBackground(Color.WHITE);
         back.setForeground(new Color(133, 193, 233));
         back.setFont(new Font("Tahoma", Font.BOLD, 14));
         back.setBorder(new LineBorder(new Color(133, 193, 233)));
+        back.addActionListener(this);
         p1.add(back);
 
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/signup.png"));
@@ -92,6 +97,29 @@ public class Signup extends JFrame{
         image.setBounds(600,50, 250, 250);
         add(image);
         setVisible(true);
+    }
+    public void actionPerformed(ActionEvent ae){
+        if(ae.getSource() == create){
+           String username = tfusername.getText();
+           String name = tfname.getText();
+           String password = tfpassword.getText();
+           String question = security.getSelectedItem();
+           String answer = tfanswer.getText();
+
+           String query = "insert into account values('"+username+"', '"+name+"', '"+password+"', '"+question+"', '"+answer+"')";
+           try{
+               Conn c = new Conn();
+               c.s.executeUpdate(query);
+               JOptionPane.showMessageDialog(null, "Account Created Successfully");
+               setVisible(false);
+               new Login();
+           } catch (Exception e) {
+               e.printStackTrace();
+           }
+        } else if (ae.getSource() == back) {
+            setVisible(false);
+            new Login();
+        }
     }
 
     public static void main(String[] args) {
