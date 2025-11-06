@@ -2,7 +2,11 @@ package travelandtourism;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-public class Login extends  JFrame{
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Login extends  JFrame implements ActionListener {
+    JButton login, signup, Forget_password;
     Login(){
         setSize(700, 500);
         setLocation(300, 100);
@@ -46,25 +50,28 @@ public class Login extends  JFrame{
         tfpassword.setBorder(BorderFactory.createEmptyBorder());
         p2.add(tfpassword);
 
-        JButton login = new JButton("Login");
+        login = new JButton("Login");
         login.setBounds(60, 190, 80, 30 );
         login.setBackground(new Color(133, 193, 233));
         login.setForeground(Color.WHITE);
         login.setBorder(new LineBorder(new Color(133, 193, 233)));
+        login.addActionListener(this);
         p2.add(login);
 
-        JButton signup = new JButton("SignUp");
+        signup = new JButton("SignUp");
         signup.setBounds(170, 190, 80, 30 );
         signup.setBackground(new Color(133, 193, 233));
         signup.setForeground(Color.WHITE);
         signup.setBorder(new LineBorder(new Color(133, 193, 233)));
+        signup.addActionListener(this);
         p2.add(signup);
 
-        JButton Forget_password = new JButton("Forgot Password");
+        Forget_password = new JButton("Forgot Password");
         Forget_password.setBounds(90, 250, 150, 30 );
         Forget_password.setBackground(new Color(133, 193, 233));
         Forget_password.setForeground(Color.WHITE);
         Forget_password.setBorder(new LineBorder(new Color(133, 193, 233)));
+        Forget_password.addActionListener(this);
         p2.add(Forget_password);
 
         JLabel text = new JLabel("Trouble in Login...");
@@ -72,6 +79,17 @@ public class Login extends  JFrame{
         text.setForeground(Color.RED);
         p2.add(text);
         setVisible(true);
+    }
+    public void actionPerformed(ActionEvent ae){
+        if (ae.getSource() == login){
+            
+        } else if (ae.getSource()== signup) {
+            setVisible(false);
+            new Signup();
+        }else {
+            setVisible(false);
+            new ForgetPassword();
+        }
     }
     public static void main(String[] args) {
         new Login();
