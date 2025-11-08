@@ -2,9 +2,14 @@ package travelandtourism;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Dashboard extends JFrame {
-     Dashboard() {
+public class Dashboard extends JFrame implements ActionListener {
+    String username;
+    JButton addpersondetails;
+    Dashboard(String username) {
+        this.username = username;
          //setBounds(0,0,1600,1000);
          setExtendedState(JFrame.MAXIMIZED_BOTH);
          setLayout(null);
@@ -34,12 +39,13 @@ public class Dashboard extends JFrame {
          p2.setBounds(0,65,300,900);
          add(p2);
 
-         JButton addpersondetails = new JButton("Add Person Details");
+         addpersondetails = new JButton("Add Person Details");
          addpersondetails.setBounds(0,0,300,50);
          addpersondetails.setBackground(new Color(0,0,102));
          addpersondetails.setForeground(Color.WHITE);
          addpersondetails.setFont(new Font("Tahoma", Font.BOLD,18));
          addpersondetails.setMargin(new Insets(0,0,0,60));
+         addpersondetails.addActionListener(this);
          p2.add(addpersondetails);
 
          JButton updatepersondetails = new JButton("Update Person Details");
@@ -168,7 +174,12 @@ public class Dashboard extends JFrame {
          icon1.add(text);
          setVisible(true);
      }
+     public void actionPerformed(ActionEvent ae){
+        if(ae.getSource()==addpersondetails){
+            new AddCustomer(username);
+        }
+     }
     public static void main(String[] args) {
-        new Dashboard();
+        new Dashboard("");
     }
 }
