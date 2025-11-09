@@ -98,9 +98,9 @@ public class AddCustomer extends JFrame implements ActionListener {
         phone.setBounds(30,370,150,25);
         add(phone);
 
-        tfaddress = new JTextField();
-        tfaddress.setBounds(220,370,150,25);
-        add(tfaddress);
+        tfphone = new JTextField();
+        tfphone.setBounds(220,370,150,25);
+        add(tfphone);
 
         add = new JButton("Add");
         add.setBounds(70,430,100,50);
@@ -127,7 +127,7 @@ public class AddCustomer extends JFrame implements ActionListener {
 
         try{
             Conn c= new Conn();
-            ResultSet rs = c.s.executeQuery("select * from account where username = ");
+            ResultSet rs = c.s.executeQuery("select * from account where username = 'ishita11'");
             while(rs.next()){
                 labelusername.setText(rs.getString("username"));
                 labelname.setText(rs.getString("name"));
