@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 
 public class Dashboard extends JFrame implements ActionListener {
     String username;
-    JButton addpersondetails, viewpersonaldetails, updatepersondetails,check,book, view;
+    JButton addpersondetails, viewpersonaldetails, updatepersondetails,check,book, view, viewhotels, destinations;
     Dashboard(String username) {
         this.username = username;
          //setBounds(0,0,1600,1000);
@@ -101,12 +101,13 @@ public class Dashboard extends JFrame implements ActionListener {
          view.addActionListener(this);
          p2.add(view);
 
-         JButton viewhotels = new JButton("View Hotels");
+         viewhotels = new JButton("View Hotels");
          viewhotels.setBounds(0,315,300,50);
          viewhotels.setBackground(new Color(0,0,102));
          viewhotels.setForeground(Color.WHITE);
          viewhotels.setFont(new Font("Tahoma", Font.BOLD,18));
          viewhotels.setMargin(new Insets(0,0,0,135));
+         viewhotels.addActionListener(this);
          p2.add(viewhotels);
 
          JButton bookhotel = new JButton("Book Hotel");
@@ -125,12 +126,13 @@ public class Dashboard extends JFrame implements ActionListener {
          viewbookhotel.setMargin(new Insets(0,0,0,80));
          p2.add(viewbookhotel);
 
-         JButton destinations = new JButton("Destinations");
+         destinations = new JButton("Destinations");
          destinations.setBounds(0,450,300,50);
          destinations.setBackground(new Color(0,0,102));
          destinations.setForeground(Color.WHITE);
          destinations.setFont(new Font("Tahoma", Font.BOLD,18));
          destinations.setMargin(new Insets(0,0,0,130));
+         destinations.addActionListener(this);
          p2.add(destinations);
 
          JButton payments = new JButton("Payments");
@@ -192,6 +194,10 @@ public class Dashboard extends JFrame implements ActionListener {
          new BookPackage(username);
         } else if (ae.getSource()==view) {
          new ViewPackage(username);
+        } else if (ae.getSource()==viewhotels) {
+         new ViewHotels();
+        } else if (ae.getSource()==destinations) {
+         new Destinations();
         }
      }
     public static void main(String[] args) {
