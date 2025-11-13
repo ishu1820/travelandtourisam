@@ -1,4 +1,5 @@
 package travelandtourism;
+import javax.print.MultiDocPrintService;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
@@ -7,7 +8,10 @@ import java.awt.event.ActionListener;
 
 public class Login extends  JFrame implements ActionListener {
     JButton login, signup, Forget_password;
+    JTextField tfusername, tfpassword;
+    //String username;
     Login(){
+        //this.username = username;
         setSize(700, 500);
         setLocation(300, 100);
         setLayout(null);
@@ -35,7 +39,7 @@ public class Login extends  JFrame implements ActionListener {
         lblusername.setFont(new Font("SAN SERIF", Font.BOLD, 20));
         p2.add(lblusername);
 
-        JTextField tfusername = new JTextField();
+        tfusername = new JTextField();
         tfusername.setBounds(60, 50, 200, 30);
         tfusername.setBorder(BorderFactory.createEmptyBorder());
         p2.add(tfusername);
@@ -45,7 +49,7 @@ public class Login extends  JFrame implements ActionListener {
         lblpassword.setFont(new Font("SAN SERIF", Font.BOLD, 20));
         p2.add(lblpassword);
 
-        JTextField tfpassword = new JTextField();
+        tfpassword = new JTextField();
         tfpassword.setBounds(60, 140, 200, 30);
         tfpassword.setBorder(BorderFactory.createEmptyBorder());
         p2.add(tfpassword);
@@ -82,7 +86,7 @@ public class Login extends  JFrame implements ActionListener {
     }
     public void actionPerformed(ActionEvent ae){
         if (ae.getSource() == login){
-            
+            new Dashboard(tfusername.getText());
         } else if (ae.getSource()== signup) {
             setVisible(false);
             new Signup();
